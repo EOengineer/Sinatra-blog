@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require_relative 'lib/models/blog'
 require 'pry'
+require 'json'
 
 
 get '/' do
@@ -36,10 +37,26 @@ end
 
 
 
+get '/api/blogs' do
+  content_type :json
+  @blogs = Blog.all.to_json
+end
+
+get '/api/blogs/:id' do
+  content_type :json
+  @blog = Blog.find(params[:id]).to_json
+end
 
 
 
-configure do
+
+
+
+configure :development do
   set :database, {adapter: "sqlite3", database: "blog.sqlite3"}
+end
+
+configure :test do
+  set :database, {adapter: "sqlite3", database: "blog-test.sqlite3"}
 end
 

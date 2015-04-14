@@ -49,6 +49,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  json
   pry
   rake
   shotgun
