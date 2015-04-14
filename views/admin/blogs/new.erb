@@ -1,0 +1,15 @@
+<h1>This is where new blogs go!</h1>
+<br/>
+<form action="/blogs" method="post"role="form">
+ <div class="form-group">
+   <label for="blog_title">Title:</label>
+   <br>
+   <input id="blog_title" class="form-control" name="blog[title]" type="text" value="<%= @blog.title %>" style="width=90%"/>
+ </div>
+ <div class="form-group">
+   <label for="blog_body">Body:</label>
+   <br>
+   <textarea id="blog_body" name="blog[body]" class="form-control" rows="10"><%= @blog.body %></textarea>
+ </div>
+ <button type="submit" class="btn btn-success">Submit</button>
+</form>
