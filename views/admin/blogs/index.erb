@@ -1,0 +1,7 @@
+<ul>
+<% @blogs.each do |blog| %>
+ <li>
+   <h4><a href="/admin/blogs/<%= blog.id %>"><%= blog.title %></a></h4>
+ </li>
+<% end %>
+</ul>

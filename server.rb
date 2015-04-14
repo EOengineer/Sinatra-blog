@@ -8,30 +8,30 @@ get '/' do
   erb :index
 end
 
-get '/blogs' do
+get '/admin/blogs' do
   @blogs = Blog.all
-  erb :"blogs/index"
+  erb :"admin/blogs/index"
 end
 
-get "/blogs/new" do
+get "/admin/blogs/new" do
   @blog = Blog.new
-  erb :"blogs/new"
+  erb :"/admin/blogs/new"
 end
 
 
-post "/blogs" do
+post "/admin/blogs" do
   @blog = Blog.new(params[:blog])
 
   if @blog.save
-    redirect "blogs/#{@blog.id}"
+    redirect "/admin/blogs/#{@blog.id}"
   else
-    erb :"blogs/new"
+    erb :"admin/blogs/new"
   end
 end
 
-get '/blogs/:id' do
+get '/admin/blogs/:id' do
   @blog = Blog.find(params[:id])
-  erb :"blogs/show"
+  erb :"admin/blogs/show"
 end
 
 
