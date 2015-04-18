@@ -1,22 +1,31 @@
 require 'sinatra'
 require 'sinatra/activerecord'
+require 'sinatra/flash'
+require 'sinatra/assetpack'
 require_relative 'lib/models/blog'
 require 'pry'
 require 'json'
 
 
 get '/' do
-  erb :index
+  erb :admin_layout, layout: false do
+    erb :index
+  end
 end
 
 get '/admin/blogs' do
   @blogs = Blog.all
-  erb :"admin/blogs/index"
+  erb :admin_layout, layout: false do
+    erb :"admin/blogs/index"
+  end
 end
 
 get "/admin/blogs/new" do
   @blog = Blog.new
-  erb :"/admin/blogs/new"
+  erb :admin_layout, layout: false do
+    erb :"/admin/blogs/new"
+  end
+
 end
 
 
@@ -25,14 +34,19 @@ post "/admin/blogs" do
 
   if @blog.save
     redirect "/admin/blogs/#{@blog.id}"
+    flash[:success] = "Blog was successfully added!"
   else
-    erb :"admin/blogs/new"
+    erb :admin_layout, layout: false do
+      erb :"/admin/blogs/new"
+    end
   end
 end
 
 get '/admin/blogs/:id' do
   @blog = Blog.find(params[:id])
-  erb :"admin/blogs/show"
+  erb :admin_layout, layout: false do
+    erb :"admin/blogs/show"
+  end
 end
 
 
